@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sally Screening Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Sally Candidate Screening</h1>
+      <p>
+        Upload the requisition package to evaluate candidates. Provide a CSV or
+        Excel workbook with the required columns and attach the resume files.
+      </p>
+      <form action="/screen" method="post" enctype="multipart/form-data">
+        <label>
+          Candidate Sheet (CSV or Excel)
+          <input type="file" name="candidate_sheet" accept=".csv,.xls,.xlsx" required />
+        </label>
+        <label>
+          Resume Files (PDF, DOCX, TXT)
+          <input type="file" name="resumes" accept=".pdf,.docx,.txt" multiple required />
+        </label>
+        <label>
+          Job Description
+          <textarea name="job_description" rows="6" placeholder="Paste the job description" required></textarea>
+        </label>
+        <label>
+          Required Keywords (comma separated)
+          <input type="text" name="required_keywords" placeholder="e.g. Azure, Data Engineering" />
+        </label>
+        <label>
+          Minimum Years of Experience
+          <input type="number" name="min_experience" step="0.5" min="0" value="0" />
+        </label>
+        <button type="submit">Run Screening</button>
+      </form>
+      <section>
+        <h2>Input Expectations</h2>
+        <ul>
+          <li>
+            Candidate sheet must include columns:
+            <code>candidate_id</code>, <code>full_name</code>, <code>email</code>,
+            <code>years_experience</code>, <code>resume_filename</code>.
+          </li>
+          <li>
+            Resume filenames must match the values in
+            <code>resume_filename</code> (including file extension).
+          </li>
+          <li>
+            Supported resume formats: PDF, DOCX, or plain text.
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
